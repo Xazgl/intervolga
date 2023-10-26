@@ -12,7 +12,7 @@ import { PassportInputes } from "../inputes/PassportInputes";
 
 export function Form() {
 
-    const [carBrand, setCarBrand] = useState(localStorage.getItem('carBrand') || '')
+    const [carBrand, setCarBrand] = useState(localStorage.getItem('carBrand')  || '')
     const [carModel, setCarModel] = useState(localStorage.getItem('carModel') || '')
     const [year, setYear] = useState(localStorage.getItem('year') || '')
     const [series, setSeries] = useState(localStorage.getItem('series') || '')
@@ -37,6 +37,10 @@ export function Form() {
 
 
     useEffect(() => {
+        console.log()
+    }, [errorObj])
+
+    useEffect(() => {
         localStorage.setItem('carBrand', carBrand);
         localStorage.setItem('carModel', carModel);
         localStorage.setItem('year', year);
@@ -55,6 +59,7 @@ export function Form() {
         if (checked === true && name > '' && phone > '' &&
             carBrand > '' && year > '' && series > '' && carNumber > '' && passportNumber > '' && drivers.length > 0 &&
             wherePassportGet > '' && carModel > '' && series.length == 4 && passportNumber.length == 6
+            && passportNumber.length == 6
             && carNumber.length >= 8) {
             setDisabledBtn(false)
         } else {
@@ -100,6 +105,7 @@ export function Form() {
                         messageError: el.message
                     }
                 })
+                console.log(errorsLogs)
                 
                 setErrorObj(errorsLogs)
         }

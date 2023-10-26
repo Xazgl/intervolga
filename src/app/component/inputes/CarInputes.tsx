@@ -11,7 +11,7 @@ type Props = {
     setYear: Dispatch<SetStateAction<string>>,
     carNumber: string,
     setCarNumber: Dispatch<SetStateAction<string>>,
-    errorObj:ErrorObj[]
+    errorObj: ErrorObj[]
 
 }
 export function CarInputes({ carBrand, setCarBrand, errorObj, carModel, setCarModel, year, setYear, carNumber, setCarNumber }: Props) {
@@ -38,10 +38,13 @@ export function CarInputes({ carBrand, setCarBrand, errorObj, carModel, setCarMo
                             flexDirection: 'column',
                         }}
                     >
-                        <div className={`inputTitleMini ${errorObj.find(error => error.fieldName === 'carBrand' ? 'border-[red]' :null)}`}>Марка автомобиля*</div>
+                        <div className='inputTitleMini'>Марка автомобиля*</div>
                         <input type="text"
-                            className="name"
-                            id="name"
+                            className={`${errorObj.length > 0 && errorObj.find(error => error.fieldName === 'carBrand')
+                               ? 'border-[red] border-[solid] border-[2px]'
+                               : 'border-[#131313] border-[solid] border-[2px]'
+                               } 
+                           `}
                             name="carBrand"
                             placeholder="Hyundai"
                             required
@@ -58,11 +61,14 @@ export function CarInputes({ carBrand, setCarBrand, errorObj, carModel, setCarMo
                             flexDirection: 'column',
                         }}
                     >
-                        <div className="inputTitleMini">Модель*</div>
+                        <div className='inputTitleMini'>Модель*</div>
                         <input type="text"
-                            className="name"
-                            id="name"
-                            name="model"
+                            className={`${errorObj.length > 0 && errorObj.find(error => error.fieldName === 'carModel')
+                               ? 'border-[red] border-[solid] border-[2px]'
+                               : 'border-[#131313] border-[solid] border-[2px]'
+                               } 
+                            `}
+                            name="carModel"
                             placeholder="Solaris"
                             required
                             value={carModel}
@@ -71,7 +77,7 @@ export function CarInputes({ carBrand, setCarBrand, errorObj, carModel, setCarMo
                     </Box>
                 </Box>
             </div>
-            <div className="divForm"  >
+            <div className="divForm">
                 <Box
                     sx={{
                         display: 'flex',
@@ -90,10 +96,15 @@ export function CarInputes({ carBrand, setCarBrand, errorObj, carModel, setCarMo
                             flexDirection: 'column',
                         }}
                     >
-                         
-                        <div className="inputTitleMini ">Год выпуска</div>
+
+                        <div className='inputTitleMini'>Год выпуска</div>
                         <input type="number"
                             name="year"
+                            className={`${errorObj.length > 0 && errorObj.find(error => error.fieldName === 'year')
+                                ? 'border-[red] border-[solid] border-[2px]'
+                                : 'border-[#131313] border-[solid] border-[2px]'
+                                } 
+                            `}
                             placeholder="2023"
                             required
                             value={year}
@@ -114,9 +125,14 @@ export function CarInputes({ carBrand, setCarBrand, errorObj, carModel, setCarMo
                             flexDirection: 'column',
                         }}
                     >
-                        <div className="inputTitleMini">Гос номер</div>
+                        <div className='inputTitleMini'>Гос номер</div>
                         <input
                             type="text"
+                            className={`${errorObj.length > 0 && errorObj.find(error => error.fieldName === 'carNumber')
+                               ? 'border-[red] border-[solid] border-[2px]'
+                               : 'border-[#131313] border-[solid] border-[2px]'
+                               } 
+                            `}                            
                             name="carNumber"
                             placeholder="A001AA 01"
                             required
@@ -188,7 +204,6 @@ export function CarInputes({ carBrand, setCarBrand, errorObj, carModel, setCarMo
                    height: 40px;
                    font-size: 18px; 
                    font-family:var(--font-roboto);
-                   border: 2px solid  #131313; 
                    padding: 12px 12px;
                    outline:none;
                    margin-top: 10px;

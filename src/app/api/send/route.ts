@@ -29,9 +29,8 @@ export async function POST(req: NextRequest) {
             const adminFromReq = clinetSchema.parse(await req.json())
 
 
-            // const adminFromReq = await req.json()
-
-            // //письмо
+            //Отправка заявки на почту 
+            
             // let testEmailAccount = await nodemailer.createTestAccount()
             // let transporter = nodemailer.createTransport({
             //     host: 'smtp.yandex.ru',
@@ -86,7 +85,7 @@ export async function POST(req: NextRequest) {
     } catch (error) {
         if (error instanceof ZodError) {
             return new Response(
-                `Ошибка валидации на сервере: ${error}`,
+                ` ${error}`,
                 { status: 404 }
             )
         } else {
