@@ -133,7 +133,7 @@ return (
                         setYear={setYear}
                         carNumber={carNumber}
                         setCarNumber={setCarNumber}
-                        errorsLogs={errorsLogs}
+                        errorObj={errorObj}
                     />
 
                     {/* Имя и телефон */}

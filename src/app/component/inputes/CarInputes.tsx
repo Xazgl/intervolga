@@ -11,10 +11,10 @@ type Props = {
     setYear: Dispatch<SetStateAction<string>>,
     carNumber: string,
     setCarNumber: Dispatch<SetStateAction<string>>,
-    errorsLogs:ErrorObj[]
+    errorObj:ErrorObj[]
 
 }
-export function CarInputes({ carBrand, setCarBrand, errorsLogs, carModel, setCarModel, year, setYear, carNumber, setCarNumber }: Props) {
+export function CarInputes({ carBrand, setCarBrand, errorObj, carModel, setCarModel, year, setYear, carNumber, setCarNumber }: Props) {
 
     return (
         <>
@@ -38,7 +38,7 @@ export function CarInputes({ carBrand, setCarBrand, errorsLogs, carModel, setCar
                             flexDirection: 'column',
                         }}
                     >
-                        <div className={`inputTitleMini ${errorsLogs.find(error => error.fieldName === 'carBrand' ? 'border-[red]' :null)}`}>Марка автомобиля*</div>
+                        <div className={`inputTitleMini ${errorObj.find(error => error.fieldName === 'carBrand' ? 'border-[red]' :null)}`}>Марка автомобиля*</div>
                         <input type="text"
                             className="name"
                             id="name"
