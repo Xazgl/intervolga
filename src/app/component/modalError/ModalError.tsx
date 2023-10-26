@@ -11,8 +11,8 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
+    width: '50%',
+    bgcolor: '#ffffffeb',
     border: '2px solid red',
     boxShadow: 24,
     p: 4,
@@ -41,9 +41,11 @@ export default function ModalError({ open, setOpen, errorObj }: Props) {
                 <Box sx={style}>
                     <h3 className='text-black text-2xl text-center'>Форма заполнена не корректно</h3>
                     <ul className='text-black mt-8'>
-                        { errorObj.length > 0 && 
+                        {errorObj.length > 0 &&
                             errorObj.map((error, index) => (
-                                <li className='text-black mt-3' key={index}>{error.fieldName}: {error.messageError}</li>
+                                <li className='text-black mt-3' key={index}>
+                                    <span className='text-base font-medium '> Поле {error.fieldName}</span>: {error.messageError}
+                                </li>
                             ))
                         }
                     </ul>

@@ -5,7 +5,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TextField } from "@mui/material";
 import dayjs from "dayjs";
 import { ErrorObj } from "../form/type";
-import { getBorderClass } from "./fucnction";
+import { getBorderClass } from "./function";
 
 type Props = {
     series: string,

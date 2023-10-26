@@ -34,3 +34,13 @@ export type ErrorObj = {
     fieldName: string,
     messageError: string
 }
+
+export type ZodeErrorObj = {
+    code: string,
+    minimum: string,
+    type: string,
+    inclusive: boolean,
+    exact:  boolean,
+    message: string,
+    path: [string]
+}

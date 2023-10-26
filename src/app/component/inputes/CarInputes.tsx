@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import Box from "@mui/material/Box";
 import { ErrorObj } from "../form/type";
-import { getBorderClass } from "./fucnction";
+import { getBorderClass } from "./function";
 
 type Props = {
     carBrand: string,

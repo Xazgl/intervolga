@@ -1,7 +1,7 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { IMaskInput } from "react-imask";
 import { ErrorObj } from "../form/type";
-import { getBorderClass } from "./fucnction";
+import { getBorderClass } from "./function";
 
 type Props = {
     name: string,

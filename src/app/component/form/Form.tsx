@@ -1,7 +1,7 @@
 "use client"
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { Checkbox } from "@mui/material";
-import { Driver, ErrorObj } from "./type";
+import { Driver, ErrorObj, ZodeErrorObj } from "./type";
 import { DriversForm } from "./forms/DriversForm";
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import dayjs from 'dayjs';
@@ -102,8 +102,8 @@ export function Form() {
                 const result = await res.json()
                 console.log("Ваша заявка успешно отправлена")
             } else {
-                const result = await res.json()
-                const errorsLogs = result.map(el => {
+                const result:ZodeErrorObj[] = await res.json()
+                const errorsLogs:ErrorObj[] = result.map(el=> {
                     return {
                         fieldName: el.path[0],
                         messageError: el.message
