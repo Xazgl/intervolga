@@ -4,25 +4,26 @@ import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { TextField } from "@mui/material";
 import dayjs from "dayjs";
+import { ErrorObj } from "../form/type";
+import { getBorderClass } from "./fucnction";
 
 type Props = {
     series: string,
     setSeries: Dispatch<SetStateAction<string>>,
     passportNumber: string,
     setPassportNumber: Dispatch<SetStateAction<string>>,
-    year: string,
-    setYear: Dispatch<SetStateAction<string>>,
     passportDate: dayjs.Dayjs,
-    setPassportDate:  Dispatch<SetStateAction<dayjs.Dayjs>>,
+    setPassportDate: Dispatch<SetStateAction<dayjs.Dayjs>>,
     wherePassportGet: string,
     setWherePassportGet: Dispatch<SetStateAction<string>>,
+    errorObj: ErrorObj[],
     handleChangeDate: (newValue: dayjs.Dayjs) => void
 
 }
 
 
 
-export function PassportInputes({ series, setSeries, passportNumber, setPassportNumber,
+export function PassportInputes({ series, setSeries, errorObj, passportNumber, setPassportNumber,
     passportDate, setPassportDate, wherePassportGet, setWherePassportGet, handleChangeDate }: Props) {
 
 
@@ -49,7 +50,9 @@ export function PassportInputes({ series, setSeries, passportNumber, setPassport
                         }}
                     >
                         <div className="inputTitleMini">Серия</div>
-                        <input type="text"
+                        <input
+                            className={`${getBorderClass(errorObj, 'series')}`}
+                            type="text"
                             name="series"
                             placeholder="45 01"
                             required
@@ -80,13 +83,14 @@ export function PassportInputes({ series, setSeries, passportNumber, setPassport
                         }}
                     >
                         <div className="inputTitleMini">Номер</div>
-                        <input type="text"
+                        <input
+                            className={`${getBorderClass(errorObj, 'passportNumber')}`}
+                            type="text"
                             name="passportNumber"
                             placeholder="12 54 23"
                             required
                             value={passportNumber}
                             onChange={event => {
-
                                 let newValue = '';
                                 const value = event.target.value
 
@@ -125,7 +129,7 @@ export function PassportInputes({ series, setSeries, passportNumber, setPassport
             <div className="divForm">
                 <div className="inputTitleMini pb-2">Кем выдан</div>
                 <input type="text"
-                    className="name"
+                    className={`${getBorderClass(errorObj, 'wherePassportGet')}`}
                     id="name"
                     name="wherePassportGet"
                     placeholder="РОВД Центрального района по г. Волгограду"
@@ -189,7 +193,6 @@ export function PassportInputes({ series, setSeries, passportNumber, setPassport
                    height: 40px;
                    font-size: 18px; 
                    font-family:var(--font-roboto);
-                   border: 2px solid  #131313; 
                    padding: 12px 12px;
                    outline:none;
                    margin-top: 10px;

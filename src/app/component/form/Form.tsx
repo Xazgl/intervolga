@@ -8,11 +8,12 @@ import dayjs from 'dayjs';
 import { CarInputes } from "../inputes/CarInputes";
 import { PersonalInputes } from "../inputes/PersonalDate";
 import { PassportInputes } from "../inputes/PassportInputes";
+import ModalError from "../modalError/ModalError";
 
 
 export function Form() {
 
-    const [carBrand, setCarBrand] = useState(localStorage.getItem('carBrand')  || '')
+    const [carBrand, setCarBrand] = useState(localStorage.getItem('carBrand') || '')
     const [carModel, setCarModel] = useState(localStorage.getItem('carModel') || '')
     const [year, setYear] = useState(localStorage.getItem('year') || '')
     const [series, setSeries] = useState(localStorage.getItem('series') || '')
@@ -33,7 +34,10 @@ export function Form() {
     const [disabledBtn, setDisabledBtn] = useState(true)
     const [checked, setChecked] = useState(false);
 
-    const [errorObj, setErrorObj] = useState<ErrorObj []>([])
+    const [errorObj, setErrorObj] = useState<ErrorObj[]>([])
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
 
     useEffect(() => {
@@ -105,100 +109,101 @@ export function Form() {
                         messageError: el.message
                     }
                 })
-                console.log(errorsLogs)
-                
+
                 setErrorObj(errorsLogs)
+                setOpen(true)
+            }
+
         }
-    
     }
-}
 
 
-const handleChangeDate = (newValue: dayjs.Dayjs) => {
-    setPassportDate(newValue);
-    localStorage.setItem('passportDate', dayjs(newValue).toISOString());
-};
+    const handleChangeDate = (newValue: dayjs.Dayjs) => {
+        setPassportDate(newValue);
+        localStorage.setItem('passportDate', dayjs(newValue).toISOString());
+    };
 
 
-return (
-    <>
-        <div className="background">
-            <div className="column">
-                <h1 className="titlePage">Транспортные средства и водители</h1>
-                <h3 className="desc">Заполните поля ниже, чтобы мы могли предоставить вам расчеты</h3>
+    return (
+        <>
+            <div className="background">
+                <ModalError open={open} setOpen={setOpen}    errorObj={errorObj}/>
+                <div className="column">
+                    <h1 className="titlePage">Транспортные средства и водители</h1>
+                    <h3 className="desc">Заполните поля ниже, чтобы мы могли предоставить вам расчеты</h3>
 
-                <form onSubmit={sendmail}>
+                    <form onSubmit={sendmail}>
 
-                    {/* Данные авто*/}
-                    <CarInputes
-                        carBrand={carBrand}
-                        setCarBrand={setCarBrand}
-                        carModel={carModel}
-                        setCarModel={setCarModel}
-                        year={year}
-                        setYear={setYear}
-                        carNumber={carNumber}
-                        setCarNumber={setCarNumber}
-                        errorObj={errorObj}
-                    />
-
-                    {/* Имя и телефон */}
-                    <PersonalInputes
-                        name={name}
-                        setName={setName}
-                        phone={phone}
-                        setPhone={setPhone}
-                    />
-
-                    {/* паспорт */}
-                    <PassportInputes
-                        series={series}
-                        setSeries={setSeries}
-                        passportNumber={passportNumber}
-                        setPassportNumber={setPassportNumber}
-                        year={year}
-                        setYear={setYear}
-                        passportDate={passportDate}
-                        setPassportDate={setPassportDate}
-                        wherePassportGet={wherePassportGet}
-                        setWherePassportGet={setWherePassportGet}
-                        handleChangeDate={handleChangeDate}
-                    />
-
-                    {/* страховка */}
-                    <div className="divForm" id={'divBorder'}>
-                        <div className="inputTitle">Включить в страховку</div>
-                        <DriversForm setDrivers={setDrivers} drivers={drivers}  />
-                    </div>
-
-                    <div className="divForm" style={{ alignItems: "start" }}>
-                        <div className="inputTitle" style={{ fontSize: '14px' }}>Даю согласие на обработку своих персональных данных и соглашаюсь с политикой обработки персональных данных</div>
-                        <Checkbox
-                            color="default"
-                            sx={{ color: 'black' }}
-                            checked={checked}
-                            onChange={handleChange}
-                            inputProps={{ 'aria-label': 'controlled' }}
+                        {/* Данные авто*/}
+                        <CarInputes
+                            carBrand={carBrand}
+                            setCarBrand={setCarBrand}
+                            carModel={carModel}
+                            setCarModel={setCarModel}
+                            year={year}
+                            setYear={setYear}
+                            carNumber={carNumber}
+                            setCarNumber={setCarNumber}
+                            errorObj={errorObj}
                         />
-                    </div>
 
-                    <div className="divForm">
-                        <button className={className.join(' ')} ref={formBtn}
-                            type="submit"
-                            disabled={disabledBtn}
-                            title="Заполните форму, перед отправкой"
-                        >
-                            <EditNoteIcon
-                                sx={{ fontSize: '30px' }}
+                        {/* Имя и телефон */}
+                        <PersonalInputes
+                            name={name}
+                            setName={setName}
+                            phone={phone}
+                            setPhone={setPhone}
+                            errorObj={errorObj}
+                        />
+
+                        {/* паспорт */}
+                        <PassportInputes
+                            series={series}
+                            setSeries={setSeries}
+                            passportNumber={passportNumber}
+                            setPassportNumber={setPassportNumber}
+                            passportDate={passportDate}
+                            setPassportDate={setPassportDate}
+                            wherePassportGet={wherePassportGet}
+                            setWherePassportGet={setWherePassportGet}
+                            handleChangeDate={handleChangeDate}
+                            errorObj={errorObj}
+                        />
+
+                        {/* страховка */}
+                        <div className="divForm" id={'divBorder'}>
+                            <div className="inputTitle">Включить в страховку</div>
+                            <DriversForm setDrivers={setDrivers} drivers={drivers} />
+                        </div>
+
+                        <div className="divForm" style={{ alignItems: "start" }}>
+                            <div className="inputTitle" style={{ fontSize: '14px' }}>Даю согласие на обработку своих персональных данных и соглашаюсь с политикой обработки персональных данных</div>
+                            <Checkbox
+                                color="default"
+                                sx={{ color: 'black' }}
+                                checked={checked}
+                                onChange={handleChange}
+                                inputProps={{ 'aria-label': 'controlled' }}
                             />
-                            Отправить
-                        </button>
-                    </div>
-                </form>
-            </div >
-        </div >
+                        </div>
 
-        <style jsx>{`
+                        <div className="divForm">
+                            <button className={className.join(' ')} ref={formBtn}
+                                type="submit"
+                                disabled={disabledBtn}
+                                title="Заполните форму, перед отправкой"
+                            >
+                                <EditNoteIcon
+                                    sx={{ fontSize: '30px' }}
+                                />
+                                Отправить
+                            </button>
+                        </div>
+                    </form>
+                </div >
+            </div >
+
+            <style jsx>{`
   
            .background {
                 display:flex; 
@@ -350,6 +355,6 @@ return (
             }
 
         `}</style>
-    </>
-)
+        </>
+    )
 }

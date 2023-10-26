@@ -1,14 +1,17 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { IMaskInput } from "react-imask";
+import { ErrorObj } from "../form/type";
+import { getBorderClass } from "./fucnction";
 
 type Props = {
     name: string,
     setName: Dispatch<SetStateAction<string>>,
     phone: string,
     setPhone: Dispatch<SetStateAction<string>>,
+    errorObj: ErrorObj[]
 }
 
-export function PersonalInputes({ name, setName, phone, setPhone }: Props) {
+export function PersonalInputes({ name, setName, phone, setPhone, errorObj }: Props) {
 
     return (
         <>
@@ -17,7 +20,7 @@ export function PersonalInputes({ name, setName, phone, setPhone }: Props) {
                 <label htmlFor="name" className="form-label"></label>
                 <div className="inputTitle">Имя*</div>
                 <input type="text"
-                    className="name"
+                    className={`${getBorderClass(errorObj, 'name')}`}
                     id="name"
                     name="name"
                     placeholder="Александр"
@@ -44,15 +47,15 @@ export function PersonalInputes({ name, setName, phone, setPhone }: Props) {
                         fontSize: '18px',
                         height: '40px',
                         width: '100%',
-                        border: '2px solid  #131313',
                         marginTop: '10px',
                         padding: '12px 12px',
                         outline: 'none',
                         fontFamily: 'var(--font-roboto)',
                         backgroundColor: 'white',
+                        
                     }}
                     id="inputP"
-                    className="phone"
+                    className={`${getBorderClass(errorObj, 'phone')}`}
                     mask={'+{7}(000)000-00-00'}
                     placeholder="+7 ___ ___ __ __"
                     required
@@ -110,7 +113,6 @@ export function PersonalInputes({ name, setName, phone, setPhone }: Props) {
                    height: 40px;
                    font-size: 18px; 
                    font-family:var(--font-roboto);
-                   border: 2px solid  #131313; 
                    padding: 12px 12px;
                    outline:none;
                    margin-top: 10px;

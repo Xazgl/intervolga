@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import Box from "@mui/material/Box";
 import { ErrorObj } from "../form/type";
+import { getBorderClass } from "./fucnction";
 
 type Props = {
     carBrand: string,
@@ -40,11 +41,7 @@ export function CarInputes({ carBrand, setCarBrand, errorObj, carModel, setCarMo
                     >
                         <div className='inputTitleMini'>Марка автомобиля*</div>
                         <input type="text"
-                            className={`${errorObj.length > 0 && errorObj.find(error => error.fieldName === 'carBrand')
-                               ? 'border-[red] border-[solid] border-[2px]'
-                               : 'border-[#131313] border-[solid] border-[2px]'
-                               } 
-                           `}
+                            className={`${getBorderClass(errorObj, 'carBrand')}`}
                             name="carBrand"
                             placeholder="Hyundai"
                             required
@@ -63,11 +60,7 @@ export function CarInputes({ carBrand, setCarBrand, errorObj, carModel, setCarMo
                     >
                         <div className='inputTitleMini'>Модель*</div>
                         <input type="text"
-                            className={`${errorObj.length > 0 && errorObj.find(error => error.fieldName === 'carModel')
-                               ? 'border-[red] border-[solid] border-[2px]'
-                               : 'border-[#131313] border-[solid] border-[2px]'
-                               } 
-                            `}
+                            className={`${getBorderClass(errorObj, 'carModel')}`}
                             name="carModel"
                             placeholder="Solaris"
                             required
@@ -100,11 +93,7 @@ export function CarInputes({ carBrand, setCarBrand, errorObj, carModel, setCarMo
                         <div className='inputTitleMini'>Год выпуска</div>
                         <input type="number"
                             name="year"
-                            className={`${errorObj.length > 0 && errorObj.find(error => error.fieldName === 'year')
-                                ? 'border-[red] border-[solid] border-[2px]'
-                                : 'border-[#131313] border-[solid] border-[2px]'
-                                } 
-                            `}
+                            className={`${getBorderClass(errorObj, 'year')}`}
                             placeholder="2023"
                             required
                             value={year}
@@ -128,11 +117,7 @@ export function CarInputes({ carBrand, setCarBrand, errorObj, carModel, setCarMo
                         <div className='inputTitleMini'>Гос номер</div>
                         <input
                             type="text"
-                            className={`${errorObj.length > 0 && errorObj.find(error => error.fieldName === 'carNumber')
-                               ? 'border-[red] border-[solid] border-[2px]'
-                               : 'border-[#131313] border-[solid] border-[2px]'
-                               } 
-                            `}                            
+                            className={`${getBorderClass(errorObj, 'carNumber')}`}
                             name="carNumber"
                             placeholder="A001AA 01"
                             required
